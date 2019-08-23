@@ -1,21 +1,38 @@
 /**
+ *
  * NotFoundPage
  *
- * This is the page we show when the user visits a url that doesn't have a route
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { compose } from 'redux';
 
-import H1 from 'components/H1';
 import messages from './messages';
 
-export default function NotFound() {
+export function NotFoundPage() {
   return (
-    <article>
-      <H1>
-        <FormattedMessage {...messages.header} />
-      </H1>
-    </article>
+    <div>
+      <FormattedMessage {...messages.header} />
+    </div>
   );
 }
+
+NotFoundPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+const withConnect = connect(
+  null,
+  mapDispatchToProps,
+);
+
+export default compose(withConnect)(NotFoundPage);
